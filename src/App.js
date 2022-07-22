@@ -13,7 +13,7 @@ import PostDetailPage from './page/PostDetailPage';
 export default function App() {
     return (
         <BrowserRouter>
-            <div className="container xl:w-[1200px] transition-all select-none sm:select-text">
+            <div className="container xl:w-[1200px] min-h-screen select-none sm:select-text">
                 <SearchModal />
                 <CUPostModal />
                 <ToastContainer

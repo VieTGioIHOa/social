@@ -66,7 +66,7 @@ export default function Search() {
                     zIndex={9999}
                     onClickOutside={() => setDataOnSearch([])}
                     render={attrs => (
-                        <div className={`${darkTheme ? 'bg-slate-600 text-white' : 'bg-slate-100'} box bg-white shadow-xl rounded-md p-5 w-[300px] sm:w-[400px]`} tabIndex="-1" {...attrs}>
+                        <div className={`${darkTheme ? 'bg-slate-600 text-white' : 'bg-slate-100'}  shadow-xl rounded-md p-5 w-[300px] sm:w-[400px]`} tabIndex="-1" {...attrs}>
                             {dataOnSearch.map((data) => (
                                 <Link
                                     to={`/posts/${data._id}`}
@@ -76,7 +76,7 @@ export default function Search() {
                                         setDataOnSearch([])
                                         setSearch('')
                                     }}
-                                    className="flex items-center hover:bg-[rgba(0,0,0,0.1)] p-3 rounded-md">
+                                    className={`${darkTheme ? 'bg-slate-700' : 'bg-slate-200'} flex items-center hover:bg-[rgba(0,0,0,0.1)] p-3 rounded-md mb-2 sm:mb-0`}>
                                     <div className="w-10 h-10 rounded-full bg-blue-900 text-white flex items-center justify-center">
                                         {data?.name.charAt(0).toUpperCase()}
                                     </div>

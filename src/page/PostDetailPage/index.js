@@ -30,25 +30,27 @@ export default function PostDetailPage() {
         <>
             <Navbar />
             <OptionsInMobile />
-            {isLoading ? <Loading /> :
-                <div className="p-5">
-                    <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200'} py-3 shadow-xl rounded-xl mx-[-12px] overflow-hidden flex sm:flex-row sm:mt-0 mt-[120px] flex-col`}>
-                        <div className="sm:w-3/5 w-full px-3">
-                            <h2 className="text-2xl font-bold">{post?.title}</h2>
-                            <p className="text-slate-400">{post?.tags.map(tag => ` #${tag.trim()}`)}</p>
-                            <p className="my-2 text-lg">{post?.message}</p>
-                            <p className="font-bold">Created by: {post?.name}</p>
-                            <p className="text-slate-400">{moment(post?.createdAt).fromNow()}</p>
-                            <div className="py-2 mt-3 border-t border-solid border-slate-400">
-                                <CommentsSection post={post} />
+            {isLoading ? <div className="pt-24 px-3 sm:px-0 sm:pt-0"><Loading /></div> :
+                <div className="pt-24 sm:pt-0">
+                    <div className="px-3 sm:px-0">
+                        <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200'} p-5 shadow-xl rounded-xl overflow-hidden flex sm:flex-row sm:mt-0 flex-col`}>
+                            <div className="sm:w-3/5 w-full sm:px-3">
+                                <h2 className="text-2xl font-bold">{post?.title}</h2>
+                                <p className="text-slate-400">{post?.tags.map(tag => ` #${tag.trim()}`)}</p>
+                                <p className="my-2 text-lg">{post?.message}</p>
+                                <p className="font-bold">Created by: {post?.name}</p>
+                                <p className="text-slate-400">{moment(post?.createdAt).fromNow()}</p>
+                                <div className="py-2 mt-3 border-t border-solid border-slate-400">
+                                    <CommentsSection post={post} />
+                                </div>
                             </div>
-                        </div>
-                        <div className="sm:w-2/5 w-full px-3">
-                            <div className="rounded-md overflow-hidden">
-                                <img
-                                    className="w-full h-[280px] object-cover"
-                                    src={post?.selectedFile} alt={post?.title} title={post?.title}
-                                />
+                            <div className="sm:w-2/5 w-full sm:px-3">
+                                <div className="rounded-md overflow-hidden">
+                                    <img
+                                        className="w-full h-[280px] object-cover"
+                                        src={post?.selectedFile} alt={post?.title} title={post?.title}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,7 +10,7 @@ import 'tippy.js/dist/tippy.css'; // optional
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { AppContext } from '../../../context/AppContext'
-import { deletePost, likePost, getPosts, getPostsBySearch } from '../../../redux/actions/posts'
+import { deletePost, likePost, getPosts, getPostsBySearch } from '../../../redux/actions/posts';
 
 export default function Post({ post }) {
     const {
@@ -21,6 +21,8 @@ export default function Post({ post }) {
     } = useContext(AppContext)
 
     const { authData } = useSelector(state => state.auth)
+
+    const [likes, setLikes] = useState(post?.likes)
 
     const dispatch = useDispatch()
     const location = useLocation()
@@ -50,16 +52,28 @@ export default function Post({ post }) {
         navigate(`/posts/${post._id}`)
     }
 
+    const userId = authData?.result?._id
+    const hasLikedPost = post?.likes.find(id => id === userId)
+
+    const handleLikePost = () => {
+        dispatch(likePost(post._id))
+        if (hasLikedPost) {
+            setLikes(post.likes.filter(id => id !== userId))
+        } else {
+            setLikes([...post.likes, userId])
+        }
+    }
+
     const Likes = () => {
-        if (post.likes.length > 0) {
-            return post.likes.find(like => like === (authData?.result?._id)) ?
+        if (likes.length > 0) {
+            return likes.find(like => like === userId) ?
                 (
                     <div className="flex items-center">
-                        <HeartIconSolid className="h-[18px] w-[18px] mr-[2px]" /> {post.likes.length} You {post.likes.length > 1 ? `and ${post.likes.length - 1} other` : `${post.likes.length > 1 ? post.likes.length - 1 : ''}`}
+                        <HeartIconSolid className="h-[18px] w-[18px] mr-[2px]" /> {likes.length} You {likes.length > 1 ? `and ${likes.length - 1} other` : `${likes.length > 1 ? likes.length - 1 : ''}`}
                     </div>
                 ) : (
                     <div className="flex items-center">
-                        <HeartIcon className="h-[18px] w-[18px] mr-[2px]" />{post.likes.length} {post.likes.length > 2 ? 'Likes' : 'Like'}
+                        <HeartIcon className="h-[18px] w-[18px] mr-[2px]" />{likes.length} {likes.length > 2 ? 'Likes' : 'Like'}
                     </div>
                 )
         }
@@ -105,7 +119,7 @@ export default function Post({ post }) {
                 <p className="h-[74px] line-clamp-3">{post?.message}</p>
                 <div className="flex justify-between mt-2">
                     <div
-                        onClick={() => { dispatch(likePost(post._id)) }}
+                        onClick={handleLikePost}
                         className={`${darkTheme ? 'text-white' : 'text-slate-400'} ${!authData ? 'text-white' : 'text-blue-700'}  cursor-pointer active:bg-[rgba(0,0,0,0.1)] p-1 rounded-md`}
                     >
                         <Likes />
@@ -119,7 +133,6 @@ export default function Post({ post }) {
                             Delete
                         </div>
                     )}
-
                 </div>
             </div>
         </div>
