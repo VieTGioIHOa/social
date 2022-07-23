@@ -10,7 +10,7 @@ import 'tippy.js/dist/tippy.css'; // optional
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { AppContext } from '../../../context/AppContext'
-import { deletePost, likePost, getPosts, getPostsBySearch } from '../../../redux/actions/posts';
+import { deletePost, likePost, getPosts, getPostsBySearch } from '../../../redux/actions/posts'
 
 export default function Post({ post }) {
     const {
@@ -23,6 +23,8 @@ export default function Post({ post }) {
     const { authData } = useSelector(state => state.auth)
 
     const [likes, setLikes] = useState(post?.likes)
+
+    const user = JSON.parse(localStorage.getItem('profile'))
 
     const dispatch = useDispatch()
     const location = useLocation()
@@ -56,11 +58,13 @@ export default function Post({ post }) {
     const hasLikedPost = post?.likes.find(id => id === userId)
 
     const handleLikePost = () => {
-        dispatch(likePost(post._id))
-        if (hasLikedPost) {
-            setLikes(post.likes.filter(id => id !== userId))
-        } else {
-            setLikes([...post.likes, userId])
+        if (user?.result?.name) {
+            dispatch(likePost(post._id))
+            if (hasLikedPost) {
+                setLikes(post.likes.filter(id => id !== userId))
+            } else {
+                setLikes([...post.likes, userId])
+            }
         }
     }
 
