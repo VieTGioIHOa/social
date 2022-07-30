@@ -76,7 +76,7 @@ export default function Form() {
 
     if (!authData?.result) {
         return (
-            <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200 text-black'} relative mb-3 max-h-[200px] rounded-md p-5 flex flex-col items-center justify-center`}>
+            <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100 text-black'} relative mb-3 max-h-[200px] rounded-md p-5 flex flex-col items-center justify-center`}>
                 <div
                     className="absolute cursor-pointer top-5 right-5 sm:hidden text-xl h-8 w-8 flex items-center justify-center rounded-full active:bg-[rgba(0,0,0,0.2)]"
                     onClick={() => setShowCUPostModalOnMoB(false)}
@@ -97,7 +97,7 @@ export default function Form() {
     }
 
     return (
-        <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200 text-black'} w-full mb-3 rounded-xl`}>
+        <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100 text-black'} w-full mb-3 rounded-xl`}>
             <div className="p-5 relative rounded-xl shadow-md">
                 <div
                     className="absolute cursor-pointer top-5 right-5 sm:hidden text-xl h-8 w-8 flex items-center justify-center rounded-full active:bg-[rgba(0,0,0,0.2)]"
@@ -146,6 +146,12 @@ export default function Form() {
                             multiple={false}
                             onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
                         />
+                        {/* <input type="file" name="selectedFile"
+                            onChange={(e) => {
+                                console.log(e.target.files[0])
+                                setPostData({ ...postData, selectedFile: e.target.files[0] })
+                            }}
+                        /> */}
                     </div>
                     <div className="mt-4 text-left">
                         <button

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import ReactPaginate from 'react-paginate';
@@ -38,6 +38,7 @@ export default function Pagination({ pageCount }) {
                 nextClassName={`${darkTheme ? 'bg-slate-900' : 'bg-slate-200'} h-8 w-8 bg-white rounded-sm shadow-sm mx-[2px] flex items-center justify-center`}
                 disabledClassName="bg-slate-100 text-white cursor-default"
                 onPageChange={handlePaginate}
+            // forcePage={page}
             />
         </div>
     )

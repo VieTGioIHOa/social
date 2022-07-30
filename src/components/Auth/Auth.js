@@ -47,7 +47,7 @@ export default function Auth() {
 
     return (
         <>
-            <div className={`${darkTheme ? 'bg-slate-700' : 'bg-slate-200'} fixed z-50 shadow-lg top-0 left-0 right-0 sm:static  rounded-xl p-5 mb-10 h-20 flex justify-between items-center`}>
+            <div className={`${darkTheme ? 'bg-slate-700' : 'bg-slate-100'} fixed z-50 shadow-lg top-0 left-0 right-0 sm:static  rounded-xl p-5 mb-10 h-20 flex justify-between items-center`}>
                 <Link
                     to="/posts"
                     className=""
@@ -59,7 +59,7 @@ export default function Auth() {
                 </div>
             </div>
             <div className="flex justify-center">
-                <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200 text-black'} max-w-[400px] mt-28 sm:mt-0 mx-5 p-5 rounded-md text-center`}>
+                <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100 text-black'} max-w-[400px] mt-28 sm:mt-0 mx-5 p-5 rounded-md text-center`}>
                     <h3 className="uppercase text-xl mb-5">{isSignUp ? 'sign up' : 'sign in'}</h3>
                     <form className="" onSubmit={handleSubmit}>
                         {isSignUp && <div className="flex justify-between">

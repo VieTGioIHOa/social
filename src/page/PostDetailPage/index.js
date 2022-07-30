@@ -33,7 +33,7 @@ export default function PostDetailPage() {
             {isLoading ? <div className="pt-24 px-3 sm:px-0 sm:pt-0"><Loading /></div> :
                 <div className="pt-24 sm:pt-0">
                     <div className="px-3 sm:px-0">
-                        <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200'} p-5 shadow-xl rounded-xl overflow-hidden flex sm:flex-row sm:mt-0 flex-col`}>
+                        <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100'} p-5 shadow-xl rounded-xl overflow-hidden flex sm:flex-row sm:mt-0 flex-col`}>
                             <div className="sm:w-3/5 w-full sm:px-3">
                                 <h2 className="text-2xl font-bold">{post?.title}</h2>
                                 <p className="text-slate-400">{post?.tags.map(tag => ` #${tag.trim()}`)}</p>

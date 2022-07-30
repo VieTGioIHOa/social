@@ -117,7 +117,7 @@ export default function Post({ post }) {
                     )}
                 </div>
             </div>
-            <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200'} p-5`}>
+            <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100'} p-5`}>
                 <p className="text-slate-400">{post?.tags.map(tag => ` #${tag.trim()}`)}</p>
                 <p className="text-xl font-bold my-2">{post?.title}</p>
                 <p className="h-[74px] line-clamp-3">{post?.message}</p>

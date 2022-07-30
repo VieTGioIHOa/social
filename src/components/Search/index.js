@@ -50,7 +50,7 @@ export default function Search() {
     }
 
     return (
-        <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-200 '} relative block sm:p-0 p-5 rounded-md sm:mb-0 mb-7`}>
+        <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100 '} relative block sm:p-0 p-5 rounded-md sm:mb-0 mb-7`}>
             <div
                 className="absolute cursor-pointer top-5 right-5 sm:hidden text-xl h-8 w-8 flex items-center justify-center rounded-full active:bg-[rgba(0,0,0,0.2)]"
                 onClick={() => setShowSearchModalOnMoB(false)}

@@ -18,7 +18,6 @@ export default function HomePage() {
 
     useEffect(() => {
         dispatch(getPosts(page))
-
     }, [dispatch, page])
 
     return (

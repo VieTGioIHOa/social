@@ -41,7 +41,7 @@ export default function NavBar() {
 
 
     return (
-        <div className={`${darkTheme ? 'bg-slate-700' : 'bg-slate-200'} fixed z-50 shadow-lg top-0 left-0 right-0 sm:static  rounded-xl p-5 sm:mb-10 h-20 flex justify-between items-center`}>
+        <div className={`${darkTheme ? 'bg-slate-700' : 'bg-slate-100'} fixed z-50 shadow-lg top-0 left-0 right-0 sm:static  rounded-xl p-5 sm:mb-10 h-20 flex justify-between items-center`}>
             <Link
                 to="/posts"
                 className=""
