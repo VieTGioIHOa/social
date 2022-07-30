@@ -23,8 +23,6 @@ export default function Post({ post }) {
     const { authData } = useSelector(state => state.auth)
 
     const [likes, setLikes] = useState(post?.likes)
-    
-    const user = JSON.parse(localStorage.getItem('profile'))
 
     const user = JSON.parse(localStorage.getItem('profile'))
 
