@@ -76,7 +76,7 @@ export default function Search() {
                                         setDataOnSearch([])
                                         setSearch('')
                                     }}
-                                    className={`${darkTheme ? 'bg-slate-700' : 'bg-slate-200'} flex items-center hover:bg-[rgba(0,0,0,0.1)] p-3 rounded-md mb-2 sm:mb-0`}>
+                                    className={`${darkTheme ? 'bg-slate-700' : 'bg-slate-200'} flex items-center hover:bg-[rgba(0,0,0,0.1)] p-3 rounded-md mb-2`}>
                                     <div className="w-10 h-10 rounded-full bg-blue-900 text-white flex items-center justify-center">
                                         {data?.name.charAt(0).toUpperCase()}
                                     </div>
