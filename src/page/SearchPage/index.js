@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 
 import Layout from '../../Layout'
 import Posts from '../../components/Posts/Posts'
-import Loading from '../../components/Loading'
+import Skeleton from '../../components/Loading/skeleton'
 import { getPostsBySearch } from '../../redux/actions/posts'
 import { AppContext } from '../../context/AppContext'
 
@@ -22,13 +22,13 @@ export default function SearchPage() {
 
     useEffect(() => {
         dispatch(getPostsBySearch(token, pageSearch))
-    }, [dispatch])
+    }, [dispatch, pageSearch, token])
 
-    const isLoading = useSelector(state => state.loading)
+    const { isSkeleton } = useSelector(state => state.loading)
 
     return (
         <Layout>
-            {isLoading ? <Loading /> : <Posts posts={postsBySearch} pageCount={pageCount} />}
+            {isSkeleton ? <Skeleton /> : <Posts posts={postsBySearch} pageCount={pageCount} />}
         </Layout>
     )
 }

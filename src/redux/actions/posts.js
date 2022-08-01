@@ -9,7 +9,7 @@ import {
     FETCH_POST,
     COMMENT
 } from '../contants/actionType'
-import { showLoading, hideLoading } from './loading'
+import { showSkeleton, hideSkeleton, showSpinner, hideSpinner } from './loading'
 import { toast } from 'react-toastify'
 
 //actions creator
@@ -26,38 +26,38 @@ export const commentPost = (value, id) => async (dispatch) => {
 
 
 export const getPost = (id) => async (dispatch) => {
-    dispatch(showLoading())
+    dispatch(showSkeleton())
     try {
         const { data } = await api.fetchPost(id)
         dispatch({ type: FETCH_POST, payload: data })
-        dispatch(hideLoading())
+        dispatch(hideSkeleton())
     } catch (error) {
-        dispatch(hideLoading())
+        dispatch(hideSkeleton())
         console.log(error.message)
     }
 }
 
 
 export const getPosts = (page) => async (dispatch) => {
-    dispatch(showLoading())
+    dispatch(showSkeleton())
     try {
         const { data } = await api.fetchPosts(page)
         dispatch({ type: FETCH_ALL, payload: data })
-        dispatch(hideLoading())
+        dispatch(hideSkeleton())
     } catch (error) {
-        dispatch(hideLoading())
+        dispatch(hideSkeleton())
         console.log(error.message)
     }
 }
 
 export const getPostsBySearch = (searchQuery, page) => async (dispatch) => {
-    dispatch(showLoading())
+    dispatch(showSkeleton())
     try {
         const { data } = await api.fetchPostsBySearch(searchQuery, page)
         dispatch({ type: FETCH_POSTS_BY_SEARCH, payload: data })
-        dispatch(hideLoading())
+        dispatch(hideSkeleton())
     } catch (error) {
-        dispatch(hideLoading())
+        dispatch(hideSkeleton())
         console.log(error)
     }
 }
@@ -80,11 +80,11 @@ export const createPost = (post) => async (dispatch) => {
 }
 
 export const updatePost = (id, updatedPost) => async (dispatch) => {
-    dispatch(showLoading())
+    dispatch(showSpinner())
     try {
         const { data } = await api.updatePost(id, updatedPost)
+        dispatch(hideSpinner())
         dispatch({ type: UPDATE_POST, payload: data })
-        dispatch(hideLoading())
         toast.success('Updated post successfully!!', {
             position: "top-right",
             autoClose: 3000,
@@ -95,6 +95,7 @@ export const updatePost = (id, updatedPost) => async (dispatch) => {
             progress: undefined,
         })
     } catch (error) {
+        dispatch(showSpinner())
         console.log(error.message);
     }
 }

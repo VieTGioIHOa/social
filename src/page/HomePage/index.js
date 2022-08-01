@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import Layout from '../../Layout'
 import Posts from '../../components/Posts/Posts'
 import { getPosts } from '../../redux/actions/posts'
-import Loading from '../../components/Loading'
 import { AppContext } from '../../context/AppContext'
+import Skeleton from '../../components/Loading/skeleton'
 
 export default function HomePage() {
     const dispatch = useDispatch()
 
     const { posts, pageCount } = useSelector(state => state.posts)
 
-    const isLoading = useSelector(state => state.loading)
+    const { isSkeleton } = useSelector(state => state.loading)
 
     const { page } = useContext(AppContext)
 
@@ -22,7 +22,7 @@ export default function HomePage() {
 
     return (
         <Layout>
-            {isLoading ? <Loading /> : <Posts posts={posts} pageCount={pageCount} />}
+            {isSkeleton ? <Skeleton /> : <Posts posts={posts} pageCount={pageCount} />}
         </Layout>
     )
 }

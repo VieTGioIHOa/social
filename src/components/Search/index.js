@@ -18,6 +18,8 @@ export default function Search() {
 
     const [isLoading, setIsLoading] = useState(false)
 
+    const [isNoResults, setNoResults] = useState(false)
+
     const [dataOnSearch, setDataOnSearch] = useState([])
 
     const dispatch = useDispatch()
@@ -25,7 +27,9 @@ export default function Search() {
 
     const fetchDataSearch = async (value) => {
         setIsLoading(true)
+        setNoResults(false)
         const { data: { posts } } = await api.fetchPostsBySearch(value)
+        setNoResults(posts.length === 0)
         setDataOnSearch(posts)
         setIsLoading(false)
     }
@@ -92,31 +96,45 @@ export default function Search() {
                         </div>
                     )}
                 >
-                    <div className="max-w-[400px] flex-1 sm:mr-5 relative">
-                        <input
-                            className="form-input text-black w-full px-3 py-1 border border-solid border-slate-300 rounded-md"
-                            name="search"
-                            placeholder="Search Post"
-                            value={search}
-                            onChange={onSearchPosts}
-                        />
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setSearch('')
-                                setDataOnSearch([])
-                            }}
-                            className={`${search.length > 0 ? 'block' : 'hidden'} ${isLoading && 'hidden'} absolute text-black active:bg-[rgba(0,0,0,0.2)] rounded-full h-6 w-6 right-4 top-[50%] translate-y-[-50%]`}>
-                            <FontAwesomeIcon icon={faXmark}
+                    <TippyHeadless
+                        interactive={true}
+                        placement="bottom"
+                        visible={isNoResults}
+                        zIndex={9999}
+                        onClickOutside={() => setNoResults(false)}
+                        render={attrs => (
+                            <div className={`${darkTheme ? 'bg-slate-600 text-white' : 'bg-slate-100'}  shadow-xl rounded-md p-5 w-[300px] sm:w-[400px]`} tabIndex="-1" {...attrs}>
+                                <p>No results with "{search}"</p>
+                            </div>
+                        )}
+                    >
+                        <div className="max-w-[400px] flex-1 sm:mr-5 relative">
+                            <input
+                                className="form-input text-black w-full px-3 py-1 border border-solid border-slate-300 rounded-md"
+                                name="search"
+                                placeholder="Search Post"
+                                value={search}
+                                onChange={onSearchPosts}
                             />
-                        </button>
-                        <button
-                            type="button"
-                            className={`${isLoading ? 'block' : 'hidden'} absolute text-black active:bg-[rgba(0,0,0,0.2)] rounded-full h-6 w-6 right-4 top-[50%] translate-y-[-50%]`}>
-                            <FontAwesomeIcon className="animate-spin" icon={faSpinner}
-                            />
-                        </button>
-                    </div>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setSearch('')
+                                    setDataOnSearch([])
+                                    setNoResults(false)
+                                }}
+                                className={`${search.length > 0 ? 'block' : 'hidden'} ${isLoading && 'hidden'} absolute text-black active:bg-[rgba(0,0,0,0.2)] rounded-full h-6 w-6 right-4 top-[50%] translate-y-[-50%]`}>
+                                <FontAwesomeIcon icon={faXmark}
+                                />
+                            </button>
+                            <button
+                                type="button"
+                                className={`${isLoading ? 'block' : 'hidden'} absolute text-black active:bg-[rgba(0,0,0,0.2)] rounded-full h-6 w-6 right-4 top-[50%] translate-y-[-50%]`}>
+                                <FontAwesomeIcon className="animate-spin" icon={faSpinner}
+                                />
+                            </button>
+                        </div>
+                    </TippyHeadless>
                 </TippyHeadless>
                 <button
                     onClick={handleSearchPosts}

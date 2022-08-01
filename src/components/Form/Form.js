@@ -3,8 +3,6 @@ import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleExclamation, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from 'react-router-dom'
 
 import { createPost, updatePost, getPosts, getPostsBySearch } from '../../redux/actions/posts'
@@ -40,12 +38,11 @@ export default function Form() {
         setPostData(post)
     }, [post])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         if (currentId) {
-            dispatch(updatePost(currentId, { ...postData, name: authData?.result.name }))
-
+            await dispatch(updatePost(currentId, { ...postData, name: authData?.result.name }))
             Clear()
 
         } else {

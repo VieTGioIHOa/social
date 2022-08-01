@@ -1,13 +1,34 @@
-import { SHOW_LOADING, HIDE_LOADING } from "../contants/actionType";
+import { SHOW_SKELETON, HIDE_SKELETON, SHOW_SPINNER, HIDE_SPINNER } from "../contants/actionType";
 
-const reducer = (isLoading = true, action) => {
+const initState = {
+    isSkeleton: true,
+    isSpinner: null
+}
+
+const reducer = (state = initState, action) => {
     switch (action.type) {
-        case SHOW_LOADING:
-            return isLoading = true
-        case HIDE_LOADING:
-            return isLoading = false
+        case SHOW_SKELETON:
+            return {
+                ...state,
+                isSkeleton: true
+            }
+        case HIDE_SKELETON:
+            return {
+                ...state,
+                isSkeleton: false
+            }
+        case SHOW_SPINNER:
+            return {
+                ...state,
+                isSpinner: true
+            }
+        case HIDE_SPINNER:
+            return {
+                ...state,
+                isSpinner: false
+            }
         default:
-            return isLoading
+            return state
     }
 }
 

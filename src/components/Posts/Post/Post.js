@@ -5,15 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { HeartIcon } from '@heroicons/react/outline'
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'; // optional
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { AppContext } from '../../../context/AppContext'
 import { deletePost, likePost, getPosts, getPostsBySearch } from '../../../redux/actions/posts'
+import Spinner from '../../Loading/spinner'
 
 export default function Post({ post }) {
     const {
+        currentId,
         setCurrentId,
         setShowCUPostModalOnMoB,
         page,
@@ -21,6 +25,7 @@ export default function Post({ post }) {
     } = useContext(AppContext)
 
     const { authData } = useSelector(state => state.auth)
+    const { isSpinner } = useSelector(state => state.loading)
 
     const [likes, setLikes] = useState(post?.likes)
 
@@ -65,7 +70,18 @@ export default function Post({ post }) {
             } else {
                 setLikes([...post.likes, userId])
             }
+        } else {
+            toast.warning('You need to login to like this post', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
         }
+
     }
 
     const Likes = () => {
@@ -89,7 +105,10 @@ export default function Post({ post }) {
     }
 
     return (
-        <div className="rounded-xl bg-white shadow-md overflow-hidden">
+        <div className="relative rounded-xl bg-white shadow-md overflow-hidden">
+            {isSpinner && currentId == post?._id && <div className="absolute flex items-center justify-center z-50 top-0 left-0 bottom-0 right-0 bg-[rgba(0,0,0,0.2)]">
+                <Spinner />
+            </div>}
             <div
                 className="cursor-pointer"
                 onClick={handleOpenPostDetail}

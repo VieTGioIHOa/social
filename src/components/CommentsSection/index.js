@@ -19,7 +19,6 @@ export default function CommentsSection({ post }) {
         const finalComment = `${authData?.result?.name}: ${comment}`
         const newComments = await dispatch(commentPost(finalComment, post._id))
         setComments(newComments)
-        commentRef.current.scrollIntoView({ behavior: 'smooth' })
         setComment('')
     }
 
@@ -28,9 +27,9 @@ export default function CommentsSection({ post }) {
             <div className="w-2/5 px-3">
                 <h2 className="text-xl text-slate-400">Comments</h2>
                 <div className="max-h-[130px] overflow-auto mt-2">
-                    {comments && comments.map((comment, i) => (
+                    {comments?.length > 0 ? comments.map((comment, i) => (
                         <p key={i}><strong>{comment.split(':')[0]}</strong> :{comment.split(':')[1]}</p>
-                    ))}
+                    )) : <p>No comments</p>}
                     <div ref={commentRef}></div>
                 </div>
             </div>
