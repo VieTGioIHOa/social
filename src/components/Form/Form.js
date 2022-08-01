@@ -40,7 +40,7 @@ export default function Form() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        setShowCUPostModalOnMoB(false)
         if (currentId) {
             await dispatch(updatePost(currentId, { ...postData, name: authData?.result.name }))
             Clear()
@@ -57,7 +57,6 @@ export default function Form() {
             Clear()
         }
 
-        setShowCUPostModalOnMoB(false)
     }
 
     const Clear = () => {
@@ -124,7 +123,7 @@ export default function Form() {
                             value={postData?.message}
                             onChange={(e) => setPostData({ ...postData, message: e.target.value })}
                             required
-                        ></textarea>
+                        />
                     </div>
                     <div className="mt-2 text-left">
                         <label className="">Tags</label>

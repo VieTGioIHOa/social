@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import { commentPost } from '../../redux/actions/posts'
 
@@ -8,6 +10,7 @@ export default function CommentsSection({ post }) {
     const dispatch = useDispatch()
 
     const { authData } = useSelector(state => state.auth)
+    const { isSpinner } = useSelector(state => state.loading)
 
     const [comment, setComment] = useState('')
 
@@ -44,11 +47,11 @@ export default function CommentsSection({ post }) {
                             className="form-input text-black px-3 py-1 my-1 rounded-md w-full border border-solid border-slate-400 "
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
-                        ></textarea>
+                        />
                         <button
                             onClick={handleSendComment}
-                            className="px-3 py-1 bg-blue-400 w-full hover:bg-blue-700 rounded-md text-white uppercase">
-                            Send
+                            className={`${isSpinner ? 'bg-blue-400' : 'hover:bg-blue-700'} px-3 py-1 bg-blue-400 w-full rounded-md text-white uppercase`}>
+                            {isSpinner ? <FontAwesomeIcon className="animate-spin ml-1" icon={faSpinner} /> : 'Send'}
                         </button>
                     </div>
                 </div>}

@@ -15,11 +15,14 @@ import { toast } from 'react-toastify'
 //actions creator
 
 export const commentPost = (value, id) => async (dispatch) => {
+    dispatch(showSpinner())
     try {
         const { data } = await api.comment(value, id)
         dispatch({ type: COMMENT, payload: data })
+        dispatch(hideSpinner())
         return data.comments
     } catch (error) {
+        dispatch(showSpinner())
         console.log(error)
     }
 }

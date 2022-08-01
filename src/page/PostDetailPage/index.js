@@ -34,7 +34,7 @@ export default function PostDetailPage() {
                 <div className="pt-24 sm:pt-0">
                     <div className="px-3 sm:px-0">
                         <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100'} p-5 shadow-xl rounded-xl overflow-hidden flex sm:flex-row sm:mt-0 flex-col-reverse`}>
-                            <div className="sm:w-3/5 w-full sm:px-3">
+                            <div className="sm:w-3/5 w-full sm:px-3 mt-3 sm:mt-0">
                                 <h2 className="text-2xl font-bold">{post?.title}</h2>
                                 <p className="text-slate-400">{post?.tags.map(tag => ` #${tag.trim()}`)}</p>
                                 <p className="my-2 text-lg">{post?.message}</p>

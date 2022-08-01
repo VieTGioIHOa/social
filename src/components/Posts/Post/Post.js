@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { HeartIcon } from '@heroicons/react/outline'
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid'
 import { toast } from 'react-toastify';
@@ -15,7 +15,7 @@ import { AppContext } from '../../../context/AppContext'
 import { deletePost, likePost, getPosts, getPostsBySearch } from '../../../redux/actions/posts'
 import Spinner from '../../Loading/spinner'
 
-export default function Post({ post }) {
+function Post({ post }) {
     const {
         currentId,
         setCurrentId,
@@ -106,7 +106,7 @@ export default function Post({ post }) {
 
     return (
         <div className="relative rounded-xl bg-white shadow-md overflow-hidden">
-            {isSpinner && currentId == post?._id && <div className="absolute flex items-center justify-center z-50 top-0 left-0 bottom-0 right-0 bg-[rgba(0,0,0,0.2)]">
+            {isSpinner && currentId === post?._id && <div className="absolute flex items-center justify-center z-50 top-0 left-0 bottom-0 right-0 bg-[rgba(0,0,0,0.2)]">
                 <Spinner />
             </div>}
             <div
@@ -128,9 +128,9 @@ export default function Post({ post }) {
                         >
                             <div
                                 onClick={handleUpdatePost}
-                                className="absolute z-50 px-1 top-6 right-8 text-white text-xl cursor-pointer rounded-full active:bg-[rgba(0,0,0,0.2)]"
+                                className="absolute z-10 px-1 top-6 right-8 text-white text-xl cursor-pointer rounded-full active:bg-[rgba(0,0,0,0.2)]"
                             >
-                                <FontAwesomeIcon icon={faEllipsis} />
+                                <FontAwesomeIcon className="h-6 w-6" icon={faPenToSquare} />
                             </div>
                         </Tippy>
                     )}
@@ -138,7 +138,7 @@ export default function Post({ post }) {
             </div>
             <div className={`${darkTheme ? 'bg-slate-700 text-white' : 'bg-slate-100'} p-5`}>
                 <p className="text-slate-400">{post?.tags.map(tag => ` #${tag.trim()}`)}</p>
-                <p className="text-xl font-bold my-2">{post?.title}</p>
+                <p className="text-xl font-bold my-2 line-clamp-2">{post?.title}</p>
                 <p className="h-[74px] line-clamp-3">{post?.message}</p>
                 <div className="flex justify-between mt-2">
                     <div
@@ -161,3 +161,5 @@ export default function Post({ post }) {
         </div>
     )
 }
+
+export default Post
