@@ -45,7 +45,9 @@ export default function Search() {
         if (search.trim()) {
             //dispatch search action creator
             dispatch(getPostsBySearch(search, pageSearch))
+
             navigate(`/posts/search?search=${search.trim()}`)
+
             setSearch('')
         } else {
             navigate('/')

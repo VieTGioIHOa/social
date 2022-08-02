@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { AppContext } from '../../context/AppContext';
 import { getPosts } from '../../redux/actions/posts';
 
-export default function Pagination({ pageCount }) {
+function Pagination({ pageCount }) {
 
     const dispatch = useDispatch()
 
@@ -38,8 +38,8 @@ export default function Pagination({ pageCount }) {
                 nextClassName={`${darkTheme ? 'bg-slate-900' : 'bg-slate-200'} h-8 w-8 bg-white rounded-sm shadow-sm mx-[2px] flex items-center justify-center`}
                 disabledClassName="bg-slate-100 text-white cursor-default"
                 onPageChange={handlePaginate}
-            // forcePage={page}
             />
         </div>
     )
 }
+export default React.memo(Pagination)

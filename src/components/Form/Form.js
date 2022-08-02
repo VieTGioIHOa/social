@@ -44,7 +44,6 @@ export default function Form() {
         if (currentId) {
             await dispatch(updatePost(currentId, { ...postData, name: authData?.result.name }))
             Clear()
-
         } else {
             dispatch(createPost({ ...postData, name: authData?.result.name }))
 
@@ -53,10 +52,8 @@ export default function Form() {
             } else {
                 dispatch(getPosts(page))
             }
-
             Clear()
         }
-
     }
 
     const Clear = () => {

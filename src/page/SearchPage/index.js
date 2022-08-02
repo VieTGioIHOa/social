@@ -25,7 +25,6 @@ export default function SearchPage() {
     }, [dispatch, pageSearch, token])
 
     const { isSkeleton } = useSelector(state => state.loading)
-
     return (
         <Layout>
             {isSkeleton ? <Skeleton /> : <Posts posts={postsBySearch} pageCount={pageCount} />}
