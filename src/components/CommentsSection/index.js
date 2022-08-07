@@ -26,8 +26,8 @@ export default function CommentsSection({ post }) {
     }
 
     return (
-        <div className="flex mx-[-12px]">
-            <div className="w-2/5 px-3">
+        <div className="sm:flex mx-[-12px]">
+            <div className="sm:w-2/5 px-3">
                 <h2 className="text-xl text-slate-400">Comments</h2>
                 <div className="max-h-[130px] overflow-auto mt-2">
                     {comments?.length > 0 ? comments.map((comment, i) => (
@@ -37,7 +37,7 @@ export default function CommentsSection({ post }) {
                 </div>
             </div>
             {authData?.result?.name &&
-                <div className="w-3/5 px-3">
+                <div className="sm:w-3/5 sm:mt-0 px-3 mt-3">
                     <h2 className="text-xl text-slate-400">Write a Comment</h2>
                     <div>
                         <textarea
